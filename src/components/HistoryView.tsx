@@ -1,15 +1,13 @@
-import { useMemo } from "react";
+// import { useMemo } from "react";
 import "./HistoryView.css";
+import { useDiaryHistory } from "../hooks/useDiaryHistory";
 
 interface HistoryViewProps {
   setView: (view: "main" | "history") => void;
 }
 
 function HistoryView({ setView }: HistoryViewProps) {
-  //local storage에서 불러온 데이터를 배열로 변환
-    const diary = useMemo<{ [key: string]: string }>(() => {
-    return JSON.parse(window.localStorage.getItem("diary") || "{}");
-  }, []);
+  const diary = useDiaryHistory();
   const history = Object.entries(diary)
     .map(([date, content]) => ({
       date,
