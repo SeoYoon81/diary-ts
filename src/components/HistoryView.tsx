@@ -6,6 +6,7 @@ interface HistoryViewProps {
 }
 
 function HistoryView({ setView }: HistoryViewProps) {
+  //local storage에서 불러온 데이터를 배열로 변환
     const diary = useMemo<{ [key: string]: string }>(() => {
     return JSON.parse(window.localStorage.getItem("diary") || "{}");
   }, []);
@@ -29,6 +30,7 @@ function HistoryView({ setView }: HistoryViewProps) {
         </button>
         <h4>다이어리 기록</h4>
       </div>
+      {/* 기록을 map으로 변환  */}
       {history.length === 0 && <div>기록이 없습니다.</div>}
       {history.map(({ date, content }) => (
         <div className="diary-item" key={date}>
